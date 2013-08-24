@@ -1,43 +1,38 @@
 __author__ = 'Justin'
 
-import os
-import glob
 import time
 import datetime
 from Adafruit_7Segment import SevenSegment
-import RPi.GPIO as io
-import subprocess
 
-io.setmode(io.BCM)
-switch_pin = 18
-io.setup(switch_pin, io.IN)
+# ===========================================================================
+# Clock Example
+# ===========================================================================
 segment = SevenSegment(address=0x70)
 
-os.system('modprobe w1-gpio')
-os.system('modprobe w1-therm')
+print "Press CTRL+Z to exit"
+print datetime.datetime.now()
 
-# base_dir = '/sys/bus/w1/devices/'
-# device_folder = glob.glob(base_dir + '28*')[0]
-# device_file = device_folder + '/w1_slave'
-colon = 0
-
-def display_time():
-	global colon
-	now = datetime.datetime.now()
-	hour = now.hour
-	minute = now.minute
-	second = now.second
-	# Set hours
-	segment.writeDigit(0, int(hour / 10))     # Tens
-	segment.writeDigit(1, hour % 10)          # Ones
-	# Set minutes
-	segment.writeDigit(3, int(minute / 10))   # Tens
-	segment.writeDigit(4, minute % 10)        # Ones
-	# Toggle colon
-	segment.writeDigitRaw(2, colon)
-	colon = colon ^ 0x2
-
-
+# Continually update the time on a 4 char, 7-segment display
 while True:
-    display_time()
-time.sleep(0.5)
+    now = datetime.datetime.now()
+    hour = now.hour
+    minute = now.minute
+    second = now.second
+    # Set hours
+    segment.writeDigit(0, int(hour / 10))     # Tens
+    segment.writeDigit(1, hour % 10)          # Ones
+    # Set minutes
+    segment.writeDigit(3, int(minute / 10))   # Tens
+    segment.writeDigit(4, minute % 10)        # Ones
+    # Toggle color
+    segment.setColon(second % 2)              # Toggle colon at 1Hz
+    # Wait one second
+    time.sleep(1)
+
+# while True:
+#
+#     segment.writeDigit(0, 0)     # Tens
+#     segment.writeDigit(1, 1)         # Ones
+#     segment.writeDigit(3, 3)   # Tens
+#     segment.writeDigit(4, 4)        # Ones
+#     time.sleep(1)
