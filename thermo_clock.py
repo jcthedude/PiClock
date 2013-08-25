@@ -12,7 +12,6 @@ segment = SevenSegment(address=0x70)
 backpack = LEDBackpack()
 
 backpack.setBrightness(0)
-backpack.setBlinkRate(2)
 
 print "Press CTRL+Z to exit"
 print datetime.datetime.now()
@@ -41,4 +40,5 @@ while True:
     segment.writeDigitRaw(2, 0x2)
     segment.writeDigit(3, 8)
     segment.writeDigit(4, 8)
-    time.sleep(1)
+    time.sleep(10)
+    break
