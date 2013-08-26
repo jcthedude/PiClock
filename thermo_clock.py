@@ -1,14 +1,16 @@
 __author__ = 'Justin'
 
+# ===========================================================================
+# Main clock program
+# ===========================================================================
+
 import time
 import datetime
 from Adafruit_7Segment import SevenSegment
 from Adafruit_LEDBackpack import LEDBackpack
 from clock_API import ClockAPI
 
-# ===========================================================================
-# Clock Example
-# ===========================================================================
+
 segment = SevenSegment(address=0x70)
 backpack = LEDBackpack()
 data = ClockAPI()
@@ -17,9 +19,12 @@ backpack.setBrightness(0)
 
 API_data = data.getWeatherCondition('seattle', 'F')
 
+temp = API_data[2]
+
 print "Press CTRL+Z to exit"
 print datetime.datetime.now()
 print API_data
+print temp
 
 
 # Continually update the time on a 4 char, 7-segment display
@@ -41,8 +46,8 @@ print API_data
 #
 while True:
 
-    segment.writeDigit(0, 8)
-    segment.writeDigit(1, 8)
+    segment.writeDigit(0, int(temp / 10))
+    segment.writeDigit(1, temp % 10)
     segment.writeDigitRaw(2, 0x2)
     segment.writeDigit(3, 8)
     segment.writeDigit(4, 8)
