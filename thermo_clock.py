@@ -4,17 +4,23 @@ import time
 import datetime
 from Adafruit_7Segment import SevenSegment
 from Adafruit_LEDBackpack import LEDBackpack
+from clock_API import ClockAPI
 
 # ===========================================================================
 # Clock Example
 # ===========================================================================
 segment = SevenSegment(address=0x70)
 backpack = LEDBackpack()
+data = ClockAPI()
 
 backpack.setBrightness(0)
 
+API_data = data.getWeatherCondition('seattle', 'F')
+
 print "Press CTRL+Z to exit"
 print datetime.datetime.now()
+print API_data
+
 
 # Continually update the time on a 4 char, 7-segment display
 # while True:
@@ -32,7 +38,7 @@ print datetime.datetime.now()
 #     segment.setColon(second % 2)              # Toggle colon at 1Hz
 #     # Wait one second
 #     time.sleep(1)
-
+#
 while True:
 
     segment.writeDigit(0, 8)
