@@ -10,6 +10,7 @@ from Adafruit_7Segment import SevenSegment
 from Adafruit_LEDBackpack import LEDBackpack
 from clock_API import ClockAPI
 
+print "Press CTRL+Z to exit"
 
 segment = SevenSegment(address=0x70)
 backpack = LEDBackpack()
@@ -21,7 +22,6 @@ API_data = data.getWeatherCondition('seattle', 'F')
 
 temp = API_data[2]
 
-print "Press CTRL+Z to exit"
 print datetime.datetime.now()
 print API_data
 print temp
