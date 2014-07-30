@@ -10,6 +10,7 @@ import time
 
 print "Press CTRL+Z to exit"
 
+
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 

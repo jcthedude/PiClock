@@ -12,6 +12,7 @@ from clock_API import ClockAPI
 
 print "Press CTRL+Z to exit"
 
+
 segment = SevenSegment(address=0x70)
 backpack = LEDBackpack()
 data = ClockAPI()

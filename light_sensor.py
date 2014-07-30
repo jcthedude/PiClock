@@ -9,6 +9,7 @@ import RPi.GPIO as GPIO
 
 print "Press CTRL+Z to exit"
 
+
 DEBUG = 1
 GPIO.setmode(GPIO.BCM)
 
