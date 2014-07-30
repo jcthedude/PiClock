@@ -10,6 +10,7 @@ import RPi.GPIO as GPIO
 DEBUG = 1
 GPIO.setmode(GPIO.BCM)
 
+
 def RCtime (RCpin):
     reading = 0
     GPIO.setup(RCpin, GPIO.OUT)
